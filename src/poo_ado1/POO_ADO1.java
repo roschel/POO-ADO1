@@ -12,9 +12,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
  * @author joaom
  */
 public class POO_ADO1 {
@@ -34,8 +34,8 @@ public class POO_ADO1 {
         ArrayList<Regiao> listaDeRegiao = new ArrayList<Regiao>();
 
         /*      ------------------------------------- */
- /*      Abertura de arquivo e loop de leitura */
- /*      ------------------------------------- */
+        /*      Abertura de arquivo e loop de leitura */
+        /*      ------------------------------------- */
         try {
             FileReader fileReader = new FileReader(nomeDoArquivo1);
 
@@ -69,28 +69,36 @@ public class POO_ADO1 {
         for (Estado estado : listaDeEstados) {
             System.out.printf("%s (PIB: %.2f%%)\n", estado.getNome(), estado.getPib() / somaTotalPib * 100);
         }
-        
+
         // Lendo arquivo de regiões
         try {
             FileReader fileReader = new FileReader(nomeDoArquivo2);
 
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+            ArrayList<String> listaDeRegioes = new ArrayList<>();
+            listaDeRegioes.add("Norte");
+            listaDeRegioes.add("Sul");
+            listaDeRegioes.add("Centro-Oeste");
+            listaDeRegioes.add("Nordeste");
+            listaDeRegioes.add("Sudeste");
+
             // loop por cada linha do arquivo
             while ((linha = bufferedReader.readLine()) != null) {
                 Regiao regiao = new Regiao();
-                for (Estado estado : listaDeEstados) {
-                    if (linha == estado.getNome() && linha != "") {
-                        regiao.totalPIB(estado.getPib());
-                    } else{
-                        
+                if (listaDeRegioes.contains(linha)){
+                    regiao.setNome(linha);
+                }else if(!linha.trim().equals("")){
+                    for(Estado a : listaDeEstados){
+                        if (a.getNome() == linha){
+                            regiao.totalPIB(a.getPib());
+                        }
                     }
-                    listaDeRegiao.add(regiao);
-                    linha = bufferedReader.readLine();
                 }
+
+                listaDeRegiao.add(regiao);
             }
 
-            System.out.println("");
 
             // feche o arquivo
             bufferedReader.close();
@@ -101,8 +109,8 @@ public class POO_ADO1 {
         }
 
         /*      ------------------------------------- */
- /*      Exemplo de escrita em arquivo         */
- /*      ------------------------------------- */
+        /*      Exemplo de escrita em arquivo         */
+        /*      ------------------------------------- */
         String arquivoDeSaida = "saida.txt";
 
         try {
@@ -111,9 +119,11 @@ public class POO_ADO1 {
 
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            bufferedWriter.write("pib da regiao X = $$$$");
-            bufferedWriter.newLine();
-            bufferedWriter.write("pib da regiao Y = $$$$");
+            for (Regiao a : listaDeRegiao){
+                bufferedWriter.write("pib da regiao "+a.getNome()+" = "+a.getPib());
+                bufferedWriter.newLine();
+            }
+
 
             // feche o arquivo
             bufferedWriter.close();

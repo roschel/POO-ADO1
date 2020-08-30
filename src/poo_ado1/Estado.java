@@ -37,6 +37,12 @@ public class Estado {
         this.pib = pib;
     }
 
-    
-    
+
+    @Override
+    public String toString() {
+        return "{" +
+                "nome='" + nome + '\'' +
+                ", pib=" + pib +
+                '}';
+    }
 }
