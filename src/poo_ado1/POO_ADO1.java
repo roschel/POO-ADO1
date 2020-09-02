@@ -86,17 +86,20 @@ public class POO_ADO1 {
             // loop por cada linha do arquivo
             while ((linha = bufferedReader.readLine()) != null) {
                 Regiao regiao = new Regiao();
-                if (listaDeRegioes.contains(linha)){
+                if (listaDeRegioes.contains(linha)) {
                     regiao.setNome(linha);
-                }else if(!linha.trim().equals("")){
-                    for(Estado a : listaDeEstados){
-                        if (a.getNome() == linha){
-                            regiao.totalPIB(a.getPib());
-                        }
-                    }
-                }
+                    linha = bufferedReader.readLine();
 
-                listaDeRegiao.add(regiao);
+                    while (!(linha == null) && !linha.trim().equals("")) {
+                        for (Estado a : listaDeEstados) {
+                            if (a.getNome().equals(linha)) {
+                                regiao.totalPIB(a.getPib());
+                            }
+                        }
+                        linha = bufferedReader.readLine();
+                    }
+                    listaDeRegiao.add(regiao);
+                }
             }
 
 
@@ -119,8 +122,8 @@ public class POO_ADO1 {
 
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            for (Regiao a : listaDeRegiao){
-                bufferedWriter.write("pib da regiao "+a.getNome()+" = "+a.getPib());
+            for (Regiao a : listaDeRegiao) {
+                bufferedWriter.write("pib da regiao " + a.getNome() + " = " + a.getPib());
                 bufferedWriter.newLine();
             }
 
