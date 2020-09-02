@@ -24,14 +24,13 @@ public class POO_ADO1 {
      */
     public static void main(String[] args) {
 
-        // nome do arquivo
-        String nomeDoArquivo1 = "pib.txt";
-        String nomeDoArquivo2 = "regioes.txt";
+        run();
 
-        // linha temporaria
+    }
+
+    public static ArrayList<Estado> lerArquivoPIB (String nomeDoArquivo1){
         String linha = null;
         ArrayList<Estado> listaDeEstados = new ArrayList<Estado>();
-        ArrayList<Regiao> listaDeRegiao = new ArrayList<Regiao>();
 
         /*      ------------------------------------- */
         /*      Abertura de arquivo e loop de leitura */
@@ -70,7 +69,15 @@ public class POO_ADO1 {
             System.out.printf("%s (PIB: %.2f%%)\n", estado.getNome(), estado.getPib() / somaTotalPib * 100);
         }
 
+        return listaDeEstados;
+    }
+
+    public static void geraArquivoDeSaida(String nomeDoArquivo2, ArrayList<Estado> listaDeEstados){
         // Lendo arquivo de regiões
+
+        String linha = null;
+        ArrayList<Regiao> listaDeRegiao = new ArrayList<Regiao>();
+
         try {
             FileReader fileReader = new FileReader(nomeDoArquivo2);
 
@@ -106,9 +113,9 @@ public class POO_ADO1 {
             // feche o arquivo
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Arquivo inexistente: '" + nomeDoArquivo1 + "'");
+            System.out.println("Arquivo inexistente: '" + nomeDoArquivo2 + "'");
         } catch (IOException ex) {
-            System.out.println("Erro lendo o arquivo '" + nomeDoArquivo1 + "'");
+            System.out.println("Erro lendo o arquivo '" + nomeDoArquivo2 + "'");
         }
 
         /*      ------------------------------------- */
@@ -133,7 +140,20 @@ public class POO_ADO1 {
         } catch (IOException ex) {
             System.out.println("Erro de escrita em '" + arquivoDeSaida + "'");
         }
+    }
 
+    public static void run(){
+        // nome do arquivo
+        String nomeDoArquivo1 = "pib.txt";
+        String nomeDoArquivo2 = "regioes.txt";
+
+        /**
+         * Função que retorna lista de Estados com seus pibs.
+         * Também faz impressão de Estados por porcentagem do PIB toda de cada Estado
+         */
+        ArrayList<Estado> listaDeEstados = lerArquivoPIB(nomeDoArquivo1);
+
+        geraArquivoDeSaida(nomeDoArquivo2, listaDeEstados);
     }
 
 }
