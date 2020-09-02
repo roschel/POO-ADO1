@@ -153,6 +153,9 @@ public class POO_ADO1 {
          */
         ArrayList<Estado> listaDeEstados = lerArquivoPIB(nomeDoArquivo1);
 
+        /**
+         * Função que imprime arquivo de saída com os dados de Região x PIB
+         */
         geraArquivoDeSaida(nomeDoArquivo2, listaDeEstados);
     }
 
