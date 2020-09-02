@@ -6,8 +6,11 @@
 package poo_ado1;
 
 /**
+ * Esta Classe é responsável por armazenar os Estados
+ * e seus respectivos PIB's
  *
  * @author joaom
+ * @version 1.0
  */
 public class Estado {
     private String nome;

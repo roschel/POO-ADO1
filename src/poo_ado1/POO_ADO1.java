@@ -15,11 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Essa Classe roda o a classe principal main, que por sua vez chama
+ * as demais funções que leem os arquivos e imprime o arquivo final.
+ *
+ *
  * @author joaom
+ * @version 1.0
+ * Date: 02/09/2020
  */
 public class POO_ADO1 {
 
     /**
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {

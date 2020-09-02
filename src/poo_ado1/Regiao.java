@@ -6,8 +6,11 @@
 package poo_ado1;
 
 /**
+ * Essa classe é responsável por armazenar as regiões
+ * e seus PIB's
  *
  * @author joaom
+ * @version 1.0
  */
 public class Regiao {
     private String nome;
